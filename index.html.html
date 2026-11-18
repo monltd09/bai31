@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập 31 - Kiểm tra HTML - Javascript 05</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            padding-top: 50px;
+        }
+        .box {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 380px;
+        }
+        h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #ketQua {
+            margin-top: 18px;
+            padding: 12px;
+            background: #e9ecef;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h3>Tính tích các số chia hết cho 7</h3>
+        <form onsubmit="handleSubmit(event)">
+            <label>Nhập số đầu:</label>
+            <input type="number" id="soDau" placeholder="Ví dụ: 1" required>
+            
+            <label>Nhập số cuối:</label>
+            <input type="number" id="soCuoi" placeholder="Ví dụ: 25" required>
+            
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="ketQua">Kết quả sẽ hiển thị tại đây...</div>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const soDau = parseInt(document.getElementById("soDau").value);
+            const soCuoi = parseInt(document.getElementById("soCuoi").value);
+            const hienThi = document.getElementById("ketQua");
+
+            if (soDau > soCuoi) {
+                hienThi.innerText = "Lỗi: Số đầu phải nhỏ hơn hoặc bằng số cuối!";
+                return;
+            }
+
+            let tich = 1;
+            let danhSachSo = [];
+
+            for (let i = soDau; i <= soCuoi; i++) {
+                if (i % 7 === 0) {
+                    tich *= i;
+                    danhSachSo.push(i);
+                }
+            }
+
+            if (danhSachSo.length > 0) {
+                console.log("Các số chia hết cho 7:", danhSachSo.join(", "));
+                console.log("Tích =", tich);
+                hienThi.innerText = `Các số chia hết cho 7: ${danhSachSo.join(" × ")}\nTích = ${tich}`;
+            } else {
+                console.log("Không có số nào chia hết cho 7 trong khoảng này.");
+                hienThi.innerText = "Không có số nào chia hết cho 7 trong khoảng này.";
+            }
+        }
+    </script>
+
+</body>
+</html>
